@@ -129,34 +129,44 @@ Connect any SparkFun Qwiic or Adafruit STEMMA QT breakout board without solderin
    - **Upload Mode:** `UART0 / Hardware CDC`
    - **Partition Scheme:** `16M Flash (3MB APP/9.9MB FATFS)` or `Default 4MB with spiffs`
 
-#### Blinking the Onboard WS2812 RGB LED (GPIO 10)
+#### Driving the Onboard WS2812 RGB LED (GPIO 10) with SimpleRGBLed
+Install **SimpleRGBLed** via the Arduino Library Manager (search for `SimpleRGBLed` by `pablojosep` or install from [GitHub](https://github.com/AchirawareElectronics/SimpleRGBLed)):
+
 ```cpp
-#include <Adafruit_NeoPixel.h>
+#include <SimpleRGBLed.h>
 
 #define RGB_PIN   10
-#define NUMPIXELS 1
+#define NUM_LEDS  1
 
-Adafruit_NeoPixel pixel(NUMPIXELS, RGB_PIN, NEO_GRB + NEO_KHZ800);
+SimpleRGBLed led(NUM_LEDS);
 
 void setup() {
-  pixel.begin();
-  pixel.setBrightness(40);
+  Serial.begin(115200);
+
+  // Initialize hardware RMT driver on GPIO 10
+  if (!led.begin(RGB_PIN)) {
+    Serial.println("Error: could not initialize WS2812 RGB LED");
+    while (true) delay(1000);
+  }
+
+  led.setBrightnessPercent(40); // 40% brightness
 }
 
 void loop() {
-  // Achiraware Crimson Red
-  pixel.setPixelColor(0, pixel.Color(163, 24, 30));
-  pixel.show();
+  // Achiraware Crimson Red (RGB)
+  led.setRGB(163, 24, 30);
   delay(1000);
 
-  // Cyan Blue
-  pixel.setPixelColor(0, pixel.Color(0, 229, 255));
-  pixel.show();
+  // Cyan Blue (Named color)
+  led.setColor("cyan");
   delay(1000);
 
-  // Amber
-  pixel.setPixelColor(0, pixel.Color(245, 166, 35));
-  pixel.show();
+  // Amber Gold (Named color)
+  led.setColor("orange");
+  delay(1000);
+
+  // Status blink (3 times in yellow)
+  led.blink("yellow", 3, 200, 200);
   delay(1000);
 }
 ```
