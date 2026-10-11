@@ -268,7 +268,7 @@ Get authentic, factory-tested boards shipped directly from Porto, Portugal:
 👉 **[Official Achiraware Store — Buy ACH-ESP32-S3F16R8](https://achiraware.com/product/ach-esp32-s3f16r8/)**
 
 - **Worldwide & Fast EU Shipping:** Shipped via registered mail / courier across Europe and globally.
-- **Support & Inquiries:** [info@achiraware.com](mailto:info@achiraware.com) | [achiraware.com](https://achiraware.com)
+- **Support & Inquiries:** [customerservice@achiraware.com](mailto:customerservice@achiraware.com) | [achiraware.com](https://achiraware.com)
 
 ---
 
